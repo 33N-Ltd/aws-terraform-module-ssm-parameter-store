@@ -5,7 +5,7 @@
  */
 
 resource "aws_ssm_parameter" "default" {
-  count           = var.enabled == "true" ? length(var.write_parameter) : 0
+  count           = var.enabled == "true" && length(var.write_parameter) > 0 ? length(var.write_parameter) : 0
   name            = lookup(var.write_parameter[count.index], "name")
   description     = lookup(var.write_parameter[count.index], "description", lookup(var.write_parameter[count.index], "name"))
   type            = lookup(var.write_parameter[count.index], "type", "SecureString")
