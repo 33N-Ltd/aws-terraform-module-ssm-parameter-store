@@ -1,9 +1,3 @@
-/**
- * aws_ssm_parameter_store module
- * This module defines read and write actions from parameter store.
- *
- */
-
 resource "aws_ssm_parameter" "default" {
   count           = var.enabled == "true" ? length(var.write_parameter) : 0
   name            = lookup(var.write_parameter[count.index], "name")
