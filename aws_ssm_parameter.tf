@@ -8,6 +8,9 @@ resource "aws_ssm_parameter" "default" {
   overwrite       = lookup(var.write_parameter[count.index], "overwrite", "false")
   allowed_pattern = lookup(var.write_parameter[count.index], "allowed_pattern", "")
   tags            = var.tags
+  lifecycle {
+    ignore_changes = [value]
+  }
 }
 
 data "aws_ssm_parameter" "read" {
